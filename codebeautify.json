@@ -1,0 +1,42 @@
+﻿[
+  {
+    "model": "product.codecollection",
+    "pk": 1,
+    "fields": {
+      "created": "2018-08-28T03:48:27.815Z",
+      "manufacturer": 5,
+      "quantity": 10,
+      "product_line": 1
+    }
+  },
+  {
+    "model": "product.codecollection",
+    "pk": 2,
+    "fields": {
+      "created": "2018-08-28T19:44:45.587Z",
+      "manufacturer": 5,
+      "quantity": 5000,
+      "product_line": 2
+    }
+  },
+  {
+    "model": "product.codecollection",
+    "pk": 3,
+    "fields": {
+      "created": "2018-08-29T12:28:49.173Z",
+      "manufacturer": 5,
+      "quantity": 100,
+      "product_line": 2
+    }
+  },
+  {
+    "model": "product.codecollection",
+    "pk": 4,
+    "fields": {
+      "created": "2018-08-29T12:29:41.522Z",
+      "manufacturer": 5,
+      "quantity": 120,
+      "product_line": 2
+    }
+  }
+]
