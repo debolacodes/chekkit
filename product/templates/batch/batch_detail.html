@@ -1,0 +1,48 @@
+{% extends 'index.html' %}
+{% load thumbnail %}
+{% block title %}
+{{ batch_object }}
+{% endblock %}
+{% block main %}
+    <header class="hero is-small is-black">
+        <div class="hero-body columns">
+            <div class="column is-2">
+                <figure class="image is-128x128">
+                    {% if batch_object.product_line.photo %}
+
+                        {% thumbnail batch_object.product_line.photo "128x128" crop="center" as im %}
+                            <img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"
+                                 title="Image of {{ batch_object.product_line.product_name }}">
+                        {% endthumbnail %}
+                    {% else %}
+                        <img src="https://bulma.io/images/placeholders/480x480.png"
+                             alt="Placeholder image for {{ batch_object.product_line.product_name }}">
+                    {% endif %}
+                </figure>
+            </div>
+            <div class="column is-10 w3-container">
+
+                <h1 class="title"># {{ batch_object }}</h1>
+                <h1 class="subtitle">{{ batch_object.product_line.product_name }}</h1>
+                <a class="w3-btn w3-white"
+                   href="{% url 'product:generate_product_codes_for_batch' batch_object.uuid %}">Generate Product Codes
+                    for Batch {{ batch_object.batch_number }}</a>
+            </div>
+        </div>
+    </header>
+    <section class="w3-margin">
+        <div class="columns is-multiline">
+            {% for product_code in product_codes %}
+                <div class="column is-3 w3-center">
+                    {% include 'partials/product_code.html' %}
+                </div>
+            {% endfor %}
+            {% if product_codes.has_next %}
+                {% with product_codes as page_obj %}
+                    {% include 'partials/paginator.html' %}
+                {% endwith %}
+
+            {% endif %}
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'index.html' %}
+{% block title %}
+    Create Product Line
+{% endblock %}
+{% load bulma_tags %}
+{% block main %}
+
+
+
+
+
+
+    <script>
+    $('#add-product-form').ajaxForm();
+
+
+
+  function readURL(input,thumbnail_id) {
+    $(thumbnail_id).show('slide');
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $(thumbnail_id).attr('src', e.target.result);
+        }
+        reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+    $(function() {
+      $("#id_photo").change(function(){
+        readURL(this,"#product_thumbnail");
+      });
+    });
+    </script>
+
+    <div class="modal is-active" id="cpl-modal">
+        <div class="modal-background" id="cpl-modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Create Product Line</p>
+            </header>
+            <form action="{% url 'product:create_product_line' %}" method="post" id="add-product-form" enctype="multipart/form-data">
+                <section class="modal-card-body">
+                    <input type="hidden" name="next" value="{{ next }}"/>
+                    {% csrf_token %}
+                    {{ create_product_line_form|bulma }}
+                </section>
+                <img src="" id="product_thumbnail" />
+                <footer class="modal-card-foot">
+                    <input type="submit" class="button w3-light-green w3-text-white is-text"
+                           value="Create Product Line"/>
+
+                </footer>
+            </form>
+        </div>
+    </div>
+
+
+{% endblock %}
+{% block script %}
+    <script>
+        let modalBackground = document.getElementById('cpl-modal-background');
+        let modal = document.getElementById('cpl-modal');
+        modalBackground.addEventListener('click', () => {
+            window.location.href = '/'
+        })
+    </script>
+{% endblock %}
