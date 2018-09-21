@@ -1,0 +1,79 @@
+{% extends 'index.html' %}
+{% load product_lines_tag %}
+{% load bulma_tags %}
+{% load static %}
+{% block title %}
+    Overview
+{% endblock %}
+{% load thumbnail %}
+{% block main %}
+
+<script>
+$(document).ready(function(){
+	var codesgenerated_obj = JSON.parse(getCodes("http://127.0.0.1:8000/productlines/"));
+	var cg = [];
+	for(var pk in codesgenerated_obj){
+		var pk_value = codesgenerated_obj[pk]
+		for(var pr in pk_value){
+			if(typeof cg[pk] !== 'undefined'){
+					cg[pk]["Y"] = cg[pk]["Y"] + Number(pk_value[pr]["fields"]["quantity"]);
+			}else{
+				cg[pk] = {};
+        // http://127.0.0.1:8000/productname/2/
+				var x_axis = getCodes("http://127.0.0.1:8000/productname/"+pk+"/");
+        cg[pk]["X"] = x_axis.substr(0, x_axis.length-5).substr(5);;
+        // alert(cg[pk]["X"]);
+				cg[pk]["Y"] = Number(pk_value[pr]["fields"]["quantity"]);
+
+			}
+		}
+	}
+
+	var viewData = [];
+	var counter = 0;
+	cg.shift();
+	var json_generated = JSON.stringify(cg);
+	// alert(json_generated);
+	var graphdata2 = {
+			linecolor: "#009999",
+			title: "Codes Generated",
+			values: cg
+	};
+
+  var graphdata2 = getCodes("")
+
+
+		$("#Linegraph").SimpleChart({
+				ChartType: "Stacked",
+				toolwidth: "100",
+				toolheight: "25",
+				axiscolor: "#E6E6E6",
+				textcolor: "#6E6E6E",
+				showlegends: true,
+				data: [graphdata2],
+				legendsize: "100",
+				legendposition: 'bottom',
+				xaxislabel: 'Products',
+				title: 'Codes over Products',
+				yaxislabel: 'Codes'
+		});
+
+
+});
+</script>
+
+<link rel="stylesheet" type="text/css" href="{% static '/frontend/css/SimpleChart.css' %}">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+<script src="{% static '/frontend/js/SimpleChart.js' %}"></script>
+
+
+<div id="Linegraph" style="width: 96%; height: 500px; margin-left:2em">
+</div>
+<br />
+<br />
+
+
+
+
+
+{% endblock %}

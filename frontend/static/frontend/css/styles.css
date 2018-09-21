@@ -1,0 +1,86 @@
+html {
+    background-color: #f1f1f1;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.title,
+label,
+.tiempos-headline {
+    font-family: "CircularStd-Book", sans-serif;
+    font-weight: 900;
+}
+
+body,
+p,
+div,
+span,
+font,
+.label,
+.help,
+.input,
+.select,
+.label,
+button,
+.button,
+option,
+select,
+.textarea {
+    font-family: "CircularStd-Book", sans-serif;
+    font-size: 16px;
+}
+
+.reset-border-radius {
+    border-radius: 0;
+}
+
+.search-input-width {
+    width: 350px;
+}
+.simple-chart-legends{
+ width:100% !important;
+}
+.SimpleChartcanvas{
+  margin-left:2em !important;
+}
+.legendvalue{
+  padding:0.6em !important;
+  margin:0.2em;
+  position:relative;
+  top:-0.7em;
+}
+.navbar-offset {
+    padding-top: 70px;
+}
+
+.trans-400 {
+    transition: 400ms;
+}
+
+a {
+    color: #8bc34a;
+     !important;
+}
+
+a.navbar-item:hover {
+    color: #8bc34a;
+}
+#product_thumbnail{
+  width:10em;
+  height:10em;
+  background: #ccc;
+  border-radius: 0.3em;
+  margin:1.2em;
+
+}
+form{
+  background:#fff;
+  overflow:auto;
+}
+#product_thumbnail{
+  display: none;
+}

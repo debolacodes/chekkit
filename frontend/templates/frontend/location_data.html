@@ -1,0 +1,17 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+	Activity
+{% endblock %}
+{% block main %}
+
+{% if product_batches %}
+	{{ product_batches }}
+	{% for product_batch in product_batches %}
+		<p> {{ product_batch.batch_number }} </p>
+		<p> {{ product_batch.expiry_date }} </p>
+	{% endfor %}
+{% endif %}
+
+
+{% endblock %}

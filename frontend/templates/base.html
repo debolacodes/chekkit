@@ -1,0 +1,130 @@
+{% load static staticfiles product_lines_tag %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: 'CircularStd-Book';
+            src: url('{% static 'frontend/fonts/circularstd-book.woff2' %}') format('woff2'),
+            url('{% static 'frontend/fonts/circularstd-book.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/circularstd-book.woff' %}') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}
+
+    {% endblock %} | Chekkit</title>
+    <link rel="stylesheet" href="{% static 'frontend/css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/w3.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontend/js/jquery.form.js' %}"></script>
+
+
+    <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    {% block css %}
+
+    {% endblock %}
+    <style>
+        .logo {
+            font-family: 'Roboto', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+<nav class="navbar w3-border-bottom w3-card-4" role="navigation" aria-label="main navigation"
+     style="padding: 6px 0; position: fixed; top: 0; width: 100%;{% if request.user.is_authenticated and not request.user.profile.activated %}z-index:-1{% endif %}">
+
+    <div class="navbar-brand">
+        <a href="/" style="margin-left:30px">
+            <img src="{% static 'frontend/images/chekkit.png' %}" width="60" height="60">
+        </a>
+
+        <a role="button" class="navbar-burger w3-margin-right" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+
+    </div>
+    <div class="navbar-menu">
+
+        <div class="navbar-end">
+            {% if request.user.is_authenticated %}
+                {% if request.user.profile.manufacturer %}
+                    <a class="navbar-item" href="{% url 'product:create_product_line' %}">Create Product Line</a>
+                    {% with request|product_lines as pl %}
+                        {% if not pl|length == 0 %}
+
+                            <a class="navbar-item" href="{% url 'product:generate_product_codes' %}">Generate Product
+                                Codes</a>
+                        {% endif %}
+                    {% endwith %}
+                    <a class="navbar-item w3-text-light-green has-text-weight-bold" style="text-decoration: underline"
+                       href="{% url 'accounts:manufacturer' %}">
+                        {{ request.user.profile.manufacturer }}
+                    </a>
+                {% else %}
+                    <a class="navbar-item"
+                       href="{% url 'accounts:create_manufacturer' %}">
+                        Create Manufacturer Account
+                    </a>
+                {% endif %}
+                <a class="navbar-item w3-opacity" href="{% url 'account_logout' %}">Logout</a>
+
+            {% else %}
+                <a class="navbar-item" href="{% url 'account_login' %}">Login</a>
+                <a class="navbar-item" href="{% url 'account_signup' %}">Register</a>
+
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<div class="navbar-offset">
+    {% block content %}
+
+    {% endblock %}
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // Get all "navbar-burger" elements
+        const $navbarBurgers = Array.prototype.slice.call(document.querySelectorAll('.navbar-burger'), 0);
+
+        // Check if there are any navbar burgers
+        if ($navbarBurgers.length > 0) {
+
+            // Add a click event on each of them
+            $navbarBurgers.forEach(el => {
+                el.addEventListener('click', () => {
+
+                    // Get the target from the "data-target" attribute
+                    const target = el.dataset.target;
+                    const $target = document.getElementById(target);
+
+                    // Toggle the "is-active" class on both the "navbar-burger" and the "navbar-menu"
+                    el.classList.toggle('is-active');
+                    $target.classList.toggle('is-active');
+
+                });
+            });
+        }
+
+    });
+    {# TODO: add code for disabling button when it is clicked one#}
+</script>
+{% block script %}
+
+{% endblock %}
+
+</body>
+</html>

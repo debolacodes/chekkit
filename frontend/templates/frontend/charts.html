@@ -1,0 +1,34 @@
+{% extends 'index.html' %}
+{% load product_lines_tag %}
+{% load bulma_tags %}
+{% block title %}
+    Overview
+{% endblock %}
+{% load thumbnail %}
+{% block main %}
+<p>Adebola Adetoyese Olumuyiwa</p>
+
+<script>
+$(document).ready(function(){
+	// http://127.0.0.1:8000/collectionsjson/
+	alert(getCodes());
+
+});
+
+//
+// function getCodes(){
+// 		var return_result = "";
+//     $.ajax({
+// 				async: false,
+// 				type: "GET",
+// 				url: "http://127.0.0.1:8000/collectionsjson/",
+// 				datatype: "json",
+// 				success: function(result){
+//         return_result = JSON.stringify(result);
+//     }});
+// 		return return_result;
+// };
+</script>
+
+
+{% endblock %}

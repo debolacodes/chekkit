@@ -1,0 +1,54 @@
+{% load static staticfiles product_lines_tag %}
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @font-face {
+            font-family: 'CircularStd-Book';
+            src: url('{% static 'frontend/fonts/circularstd-book.woff2' %}') format('woff2'),
+            url('{% static 'frontend/fonts/circularstd-book.ttf' %}') format('truetype'),
+            url('{% static 'frontend/fonts/circularstd-book.woff' %}') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}
+
+    {% endblock %} | Chekkit</title>
+    <link rel="stylesheet" href="{% static 'frontend/css/bulma.min.css' %}">
+    <link rel="stylesheet" href="{% static 'frontend/css/w3.css' %}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.2.0/js/all.js"></script>
+    <script src="{% static 'frontend/js/jquery.min.js' %}"></script>
+    <script src="{% static 'frontend/js/jquery.form.js' %}"></script>
+
+
+    <link rel="stylesheet" href="{% static 'frontend/css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+
+    {% block css %}
+
+    {% endblock %}
+    <style>
+        .logo {
+            font-family: 'Roboto', sans-serif;
+        }
+
+    </style>
+</head>
+<body>
+
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+{% block script %}
+
+{% endblock %}
+
+</body>
+</html>

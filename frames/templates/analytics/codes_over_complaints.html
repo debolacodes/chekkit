@@ -1,0 +1,40 @@
+{% extends 'frames.html' %}
+{% load static %}
+{% block title %}
+    Analytics
+{% endblock %}
+{% block main %}
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
+    <script src="{% static '/frontend/js/SimpleChart.js' %}"></script>
+
+    <script>
+        var Piedata = {
+            linecolor: "Random",
+            title: "Profit",
+            values: JSON.parse(getCodes("http://127.0.0.1:8000/ussd/complaints/"))
+        };
+        $(function () {
+            $("#ComplaintsPie").SimpleChart({
+            ChartType: "Pie",
+            toolwidth: "50",
+            toolheight: "15",
+            axiscolor: "#009999",
+            textcolor: "#ffffff",
+            showlegends: false,
+            showpielables: true,
+            data: [Piedata],
+            legendsize: "250",
+            legendposition: 'bottom',
+            xaxislabel: 'Hours',
+            title: 'Locations / Codes Checked Via USSD',
+            yaxislabel: 'Locations'
+        });
+      });
+    </script>
+    	<div id="ComplaintsPie" style="width: 300px; height:300px;">
+    </div>
+
+
+{% endblock %}

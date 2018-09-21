@@ -1,0 +1,47 @@
+{% extends 'index.html' %}
+{% block title %}
+    Collections
+{% endblock %}
+{% block main %}
+    <header class="hero is-small is-black">
+        <div class="hero-body columns">
+            <div class="w3-container w3-padding-32">
+                <h1 class="title">Collections</h1>
+                <h1 class="subtitle">A collection is a pack of codes generated at discrete times on Chekkit that can be
+                    printed directly on production line for application. You can also order packs directly for them to
+                    be delivered.</h1>
+            </div>
+        </div>
+    </header>
+    <section class="w3-margin w3-container">
+        <div class="columns is-multiline">
+            {% for collection in collection_object %}
+                <div class="column is-4">
+                    <div class="w3-padding-32 w3-padding w3-white">
+                        <label for="collection-date-created" class="menu-label w3-large">Generated On: </label>
+                        <p id="collection-date-created">{{ collection.created|date }}
+                            ({{ collection.created|timesince }})</p>
+                        <br>
+                        <label for="collection-quantity" class="menu-label w3-large">Number of Codes: </label>
+                        <p id="collection-quantity">{{ collection.quantity }}</p>
+                        <br>
+                        <label for="collection-creator" class="menu-label w3-large">Product Line:</label>
+                        <p id="collection-creator">{{ collection.product_line }}</p>
+                    </div>
+                    <div>
+                        <a href="" class="w3-half button w3-light-green w3-text-white"
+                           style="border-radius: 0">Order</a>
+                        <a href="" class="w3-half button w3-black" style="border-radius: 0">Print</a>
+                    </div>
+                </div>
+            {% endfor %}
+            {#            {% if product_codes.has_next %}#}
+            {#                {% with product_codes as page_obj %}#}
+            {#                    {% include 'partials/paginator.html' %}#}
+            {#                {% endwith %}#}
+            {##}
+            {#            {% endif %}#}
+        </div>
+    </section>
+
+{% endblock %}

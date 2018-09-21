@@ -1,0 +1,63 @@
+{% extends 'index.html' %}
+{% load static %}
+{% block title %}
+    Analytics
+{% endblock %}
+{% block main %}
+    <div class="w3-padding-large">
+        <nav class="level">
+            <a class="level-item has-text-centered w3-margin w3-padding w3-yellow w3-card-4 w3-padding-16">
+                <div>
+                    <p class="heading">Total Codes Generated</p>
+                    <p class="title totalcodesgenerated"></p>
+                </div>
+            </a>
+            <a class="level-item has-text-centered w3-margin w3-padding w3-light-blue w3-card-4 w3-padding-16">
+                <div>
+                    <p class="heading">Total Codes Tracked</p>
+                    <p class="title totalcodestracked"></p>
+                </div>
+            </a>
+            <a class="level-item has-text-centered w3-margin w3-padding w3-orange w3-card-4 w3-padding-16">
+                <div>
+                    <p class="heading">Total User Feedback</p>
+                    <p class="title totalcodestracked"></p>
+                </div>
+            </a>
+
+        </nav>
+
+        <!-- <iframe width="400px" height="400px" url="{% url 'frame_analytics' start_date='2014-01-01' end_date='2099-01-01' %}"> -->
+
+        <div id="codes_over_products" style"width:'400px' !important; height='700px' !important"  >  </div>
+        <div id="codes_over_locations" style"width:'300px' !important; height='700px' !important; float:left"></div>
+        <div id="codes_over_complaints" style"width:'300px' !important; height='700px' !important float:left"></div>
+        <script>
+        $(document).ready(function(){
+          $(".totalcodesgenerated").load("/totalcodes");
+          $(".totalcodestracked").load("/ussd/totalcodes");
+          $("#codes_over_products").load("{% url 'frame_analytics' start_date='2014-01-01' end_date='2099-01-01' %}");
+          $("#codes_over_locations").load("{% url 'frame_locations' start_date='2014-01-01' end_date='2099-01-01' %}");
+          $("#codes_over_complaints").load("{% url 'frame_complaints' start_date='2014-01-01' end_date='2099-01-01' %}");
+        });
+        </script>
+
+
+
+        <br>
+    </div>
+    <div class="modal w3-animate-bottom trans-400" id="reply-modal">
+        <div class="modal-background" id="modal-background"></div>
+        <div class="modal-card">
+            <div class="modal-content">
+                <textarea class="textarea"></textarea>
+                <br>
+                <button class="button is-white" id="send-button">Send</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block script %}
+
+
+{% endblock %}
