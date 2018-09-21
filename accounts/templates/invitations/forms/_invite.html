@@ -1,0 +1,25 @@
+{% extends 'index.html' %}
+{% load i18n bulma_tags%}
+{% block title %}Invitee to {% endblock %}
+{% block main %}
+
+    <div class="container w3-container w3-padding-large">
+
+<h1 class="menu-label w3-xlarge">{% trans "Invite" %}</h1>
+<p class="alert alert-info">{% trans "Please add an email below. The user will receive an email with instructions." %}</p>
+
+<form id="invite-form" method="POST" action="{% url 'invitations:send-invite' %}">
+  {% csrf_token %}
+  <div class="form-group">
+      {{ form|bulma_horizontal }}
+  <input type="submit" value="Submit" class="button is-link">
+  </div>
+  <div class="form-group">
+    {% for error in form.email.errors %}
+      <div class="alert alert-danger">{{ error }}</div>
+    {% endfor %}
+    {{ success_message }}
+  </div>
+</form>
+</div>
+{% endblock %}
